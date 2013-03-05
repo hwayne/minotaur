@@ -3,11 +3,15 @@ class Entity:
     def __init__(self, x = 0, y = 0):
         self.xpos = x
         self.ypos = y
-        self.hist = [(x,y)]
+        self.hist = [(y,x)]
         pass
 
+    def setBoard(self, board):
+        self.board = board
+
     def getpos(self):
-        return (self.xpos, self.ypos)
+        return (self.ypos, self.xpos)
+
     #Are two entities in same place?
     def isOverlap(self, e):
         return (self.xpos == e.xpos) and (self.ypos == e.ypos)
@@ -15,19 +19,23 @@ class Entity:
     #Generic move.
     #Note you can delay with move(0).
     def moveX(self, dist = 1):
-        self.xpos += dist
+        self.xpos += 2*dist
 #Seperate moveY for simplicity.
     def moveY(self, dist = 1):
-        self.ypos += dist
+        self.ypos += 2*dist
 
 #Check for collisions.
 #A collision is when an entity tries to move into
 #A square marked '_' or '|' (a wall)
-    def isCollision(self, char):
-        return (char == '_' or char == '|')
+    def isReachable(self, char):
+        return (char == ' ')
+
+    def isOnBoard(self, x = 0, y = 0):
+        return(0 <= self.xpos + 2*x <= len(self.board[0])
+              and 0 <= self.ypos + 2*y <= len(self.board))
 
     def updatehist(self):
-        self.hist.append((self.xpos,self.ypos))
+        self.hist.append((self.ypos,self.xpos))
     #Play a whole turn.
     def turn(self):
         self.moveX(1)
