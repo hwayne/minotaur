@@ -162,5 +162,53 @@ class PlayerTests(unittest.TestCase):
     def testBase(self):
         self.assertFalse(False)
 
+    def testValid(self):
+        self.assertTrue(self.P.turn('D'))
+
+    def testInvalid(self):
+        self.assertFalse(self.P.turn('R'))
+
+    def testDelay(self):
+        self.assertTrue(self.P.turn(' '))
+
+    def testMoveLeft(self):
+        self.P.xpos = 2
+        self.P.turn('A')
+        self.assertEqual(self.P.getpos(), (0, 0))
+    def testMoveRight(self):
+        self.P.turn('D')
+        self.assertEqual(self.P.getpos(), (0,2))
+    def testMoveUp(self):
+        self.P.ypos = 2
+        self.P.turn('W')
+        self.assertEqual(self.P.getpos(), (0, 0))
+    def testMoveDown(self):
+        self.P.turn('S')
+        self.assertEqual(self.P.getpos(), (2, 0))
+
+    def testBlockRight(self):
+        self.P.ypos = 2
+        self.P.turn('D')
+        self.assertEqual(self.P.getpos(), (2,0))
+
+    def testBlockDown(self):
+        self.P.ypos = 2
+        self.P.turn('S')
+        self.assertEqual(self.P.getpos(), (2,0))
+    
+    def testHistAfterMove(self):
+        self.P.turn('S')
+        self.P.turn('W')
+        self.assertEqual(self.P.hist, [(0,0), (2,0), (0, 0)])
+
+    def testHistAfterDelay(self):
+        self.P.turn('S')
+        self.P.turn(' ')
+        self.assertEqual(self.P.hist, [(0,0), (2,0), (2, 0)])
+
+    def tetHistAfterBlock(self):
+        self.P.turn('S')
+        self.P.turn('D')
+        self.assertEqual(self.P.hist, [(0,0), (2,0)])
 if __name__ == "__main__":
    unittest.main()

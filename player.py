@@ -4,15 +4,28 @@ class Player(entity.Entity):
 
 
     def turn(self, command):
-        valid = True #catch invalid commands
-        if self.xpos != target[1]:
-                move = (self.xpos < target[1])*2 - 1#bool is 0 or 1, so move is -1 or +1
-                char = self.board[self.ypos][(self.xpos + move)] 
-                if self.isReachable(char) and self.isOnBoard(x = move):
-                    self.moveX(move)
-                    continue #if we move horiz, no need to vert
+        rowmove = 0
+        colmove = 0
 
-        else: valid = False;
-        if valid: self.updatehist()
-        
-        return valid
+        if command == "A":
+           colmove = -1
+        elif command == "D": 
+           colmove = 1 
+        elif command == 'W':
+           rowmove = -1
+        elif command == "S":
+           rowmove = 1
+        elif command == " ":
+            self.updatehist()
+            return True
+
+        else: return False #invalid commands
+
+        if self.isOnBoard(x = colmove,y = rowmove): 
+            char = self.board[self.ypos+rowmove][(self.xpos+colmove)]
+            if self.isReachable(char):
+                 self.moveX(colmove)
+                 self.moveY(rowmove)
+                 self.updatehist()
+                 return True
+        return False
