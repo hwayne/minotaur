@@ -1,0 +1,17 @@
+You are the @. You are trying to escape the maze, while the minotaur (M) is trying to catch you. You win by starting your turn on the Exit (E). However, for every one move you take, the minotaur moves twice. It moves under the following rules:
+
+-If it can get closer to you by moving horizontally, it will move horizontally.
+-If it cannot get closer to you by moving horizontally or vertically, it will skip that move.
+
+The minotaur cannot move away from you, and cannot take an indirect path to reach you. You can use these rules to trap it or delay it.
+
+One last note: sometimes it's a good idea to skip your turn and force the minotaur to move again. You can do this by pressing spacebar.
+
+-
+
+move with WASD
+delay with spacebar
+
+reset maze with R
+undo move with U
+quit with Q
