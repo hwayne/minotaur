@@ -19,7 +19,9 @@ class Player(entity.Entity):
             self.updatehist()
             return True
 
-        else: return False #invalid commands
+        else:
+            return False #invalid commands
+
 
         if self.isOnBoard(x = colmove,y = rowmove): 
             char = self.board[self.ypos+rowmove][(self.xpos+colmove)]

@@ -2,6 +2,7 @@ import unittest
 import entity
 import minotaur
 import player
+import minotaurmaze as game
 
 class EntityTests(unittest.TestCase):
    
@@ -210,5 +211,34 @@ class PlayerTests(unittest.TestCase):
         self.P.turn('S')
         self.P.turn('D')
         self.assertEqual(self.P.hist, [(0,0), (2,0)])
+class GameTests(unittest.TestCase):
+   
+    def setUp(self):
+        self.G = game.Game("mazes/maze1")
+        
+    def testBase(self):
+        self.assertTrue(True)
+
+    def testHasBoard(self):
+        
+        self.assertNotEqual(self.G.board,[['.', ' ', '.'],[' ']*3, ['.', '|', '.']])
+
+    def testLoadsBoard(self):
+        #solved by above
+        pass
+
+    def testDisplayBoard(self):
+        self.G.displayBoard()
+
+    def testHasMinotaur(self):
+        G = game.Game("mazes/maze1")
+        self.assertEqual(G.minotaur.getpos(), (0,2))
+
+    def testHasPlayer(self):
+        G = game.Game("mazes/maze1")
+        self.assertEqual(G.player.getpos(), (4,2))
+
+    def testHasExit(self):
+        self.assertEqual(self.G.exit, (2,4))
 if __name__ == "__main__":
    unittest.main()

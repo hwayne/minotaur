@@ -44,8 +44,12 @@ class Entity:
 
     #undo move. Requires history.
     def undo(self):
-        self.hist.pop()
-    
+        if len(self.hist) > 1: self.hist.pop()
+        self.xpos = self.hist[-1][1]
+        self.ypos = self.hist[-1][0]
+
 #move back to starting coordinates.
     def reset(self):
         self.hist = [self.hist[0]]
+        self.xpos = self.hist[0][1]
+        self.ypos = self.hist[0][0]
